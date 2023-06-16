@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
+  <script>
+    var src_files = "/home/juanjo/Escritorio/Projects/LabRedes2/"
+  </script>
 <head>
   <title>Mi Pagina</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  <script src="script.js"></script>
+  <link rel="stylesheet" type="text/css" href="">
+  
 </head>
 <body>
   <h1>Bienvenido a mi pagina</h1>
-  <p>Ten un Ralsei, porque lo mereces</p>
-  <img src="/home/juanjo/Escritorio/Projects/LabRedes2/Images/ralsei.png" alt="Ralsei fumando un porro, una wea simplemente epica">
+  <p>Ten imagenes de deltarune, lo mereces</p>
+  <img id="imagen-ralsei" src="" alt="Ralsei fumando un porro, una wea simplemente epica">
+  <script src=""></script>
+  <script>
+    // Asignar las rutas a los atributos src y href
+    var cssFile = document.createElement('link');
+    cssFile.rel = 'stylesheet';
+    cssFile.type = 'text/css';
+    cssFile.href = src_files + 'styles.css';
+    document.head.appendChild(cssFile);
+
+    var jsFile = document.createElement('script');
+    jsFile.src = src_files + 'script.js';
+    document.body.appendChild(jsFile);
+  </script>
 </body>
 </html>
