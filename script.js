@@ -16,7 +16,7 @@ function cambiarImagen() {
     var img = document.getElementById("imagen-ralsei");
   
     // Cambiar la ruta de origen de la imagen
-    img.src = "/home/juanjo/Escritorio/Projects/LabRedes2/Images/" + imagenes[indice];
+    img.src = "/Images/" + imagenes[indice];
 
     // Reescalar la imagen si excede el tamaño máximo
     if (img.width > tamanoMaximo || img.height > tamanoMaximo) {
@@ -43,4 +43,5 @@ var img = document.getElementById("imagen-ralsei");
 
 // Agregar un event listener al hacer clic en la imagen
 img.addEventListener("click", cambiarImagen);
+cambiarImagen();
   
