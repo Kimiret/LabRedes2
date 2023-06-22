@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        var src_files = ""
+    </script>
+<head>
+    <title>Estás perdido?</title>
+    <link rel="stylesheet" type="text/css" href="">
+    
+</head>
+<body>
+    <h1>No deberias estar aca, en esta carpeta solo se guardan imagenes</h1>
+    <p></p>
+    <img src="" alt="">
+    <script src=""></script>
+    <script>
+        // Asignar las rutas a los atributos src y href
+        var cssFile = document.createElement('link');
+        cssFile.rel = 'stylesheet';
+        cssFile.type = 'text/css';
+        cssFile.href = src_files + 'styles.css';
+        document.head.appendChild(cssFile);
+    
+        var jsFile = document.createElement('script');
+        jsFile.src = src_files + 'script.js';
+        document.body.appendChild(jsFile);
+      </script>
+</body>
+</html>

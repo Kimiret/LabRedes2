@@ -17,7 +17,7 @@ serversocket.listen(1)
 while True:
     client_connect, client_addr = serversocket.accept()
     request = client_connect.recv(1024).decode('utf-8')
-    #print(request) #ver todos los datos que se obtienen de la request
+    print(request) #ver todos los datos que se obtienen de la request
     string_list = request.split(' ')
     method = string_list[0]
     request = string_list[1]
@@ -31,12 +31,14 @@ while True:
         mimetype = 'text/html'
         header += 'Content-Type: ' + mimetype + '\r\n'
 
+    #En caso de recibir una request de un metodo distinto a GET
     elif(method != 'GET'):
         header = 'HTTP/1.1 405 Method Not Allowed\n'
         response = '<html><body>Error 405: Method Not Allowed</body></html>'.encode('utf-8')
         mimetype = 'text/html'
         header += 'Content-Type: ' + mimetype + '\r\n'
 
+    #Si la url recibida no empieza con /
     elif(request.find('/') != 0):
         header = 'HTTP/1.1 400 Bad Request\n'
         response = '<html><body>Error 400: Bad Request</body></html>'.encode('utf-8')
@@ -57,13 +59,15 @@ while True:
         archivo_final += archivo
 
         
-            #Si la url termina en /, se asume que hay un index.html en esa direccion
+        #Si la url termina en /, se asume que hay un index.html en esa direccion
         if(archivo.endswith('/')):
             archivo_final += 'index.html'
 
         header = 'HTTP/1.1 200 OK\n'
             
         try: 
+            archivo_size = os.path.getsize(archivo_final)
+            #Al encontrar un archivo, se lee y determina su mimetype
             with open(archivo_final, 'rb') as file:
                 response = file.read()
             
@@ -79,13 +83,16 @@ while True:
                 mimetype = 'image/jpeg'
             else:
                 mimetype = 'application/octet-stream'
-            header += 'Content-Type: '+str(mimetype)+'\n\n'
+
+            #Luego se añade informacion extra del archivo al header
+            header += 'Content-Type: '+str(mimetype)+'\n' + 'Content-Length: '+str(len(response))+'\n\n'
+            #print(header)
             
         except FileNotFoundError:
             header = 'HTTP/1.1 404 Not Found\n'
             response = '<html><body>Error 404: File not found</body></html>'.encode('utf-8')
             mimetype = 'text/html'
-            header += 'Content-Type: ' + mimetype + '\n\n'
+            header += 'Content-Type: ' + mimetype + '\r\n'
 
     respuesta = header.encode('utf-8')
     respuesta += response
