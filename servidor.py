@@ -36,23 +36,23 @@ while True:
         header = 'HTTP/1.1 405 Method Not Allowed\n'
         response = '<html><body>Error 405: Method Not Allowed</body></html>'.encode('utf-8')
         mimetype = 'text/html'
-        header += 'Content-Type: ' + mimetype + '\r\n'
+        header += 'Content-Type: ' + mimetype + '\n\n'
 
     #Si la url recibida no empieza con /
     elif(request.find('/') != 0):
         header = 'HTTP/1.1 400 Bad Request\n'
         response = '<html><body>Error 400: Bad Request</body></html>'.encode('utf-8')
         mimetype = 'text/html'
-        header += 'Content-Type: ' + mimetype + '\r\n'
+        header += 'Content-Type: ' + mimetype + '\n\n'
     
     #Esta cosa por algun motivo solo sirve en Firefox, es la redireccion
     elif(request.endswith('Files') or request.endswith('Images')):
         print('redirigiendo...\n')
         header = 'HTTP/1.1 301 Moved Permanently\n'
-        header += f'Location: http://localhost:{port}{request}/\n\n'
+        header += f'Location: http://localhost:{port}{request}/\n'
         response = '<html><body>Error 301: Moved Permanently</body></html>'.encode('utf-8')
         mimetype = 'text/html'
-        header += 'Content-Type: ' + mimetype + '\r\n'
+        header += 'Content-Type: ' + mimetype + '\n\n'
     else:
         archivo = request.split('?')[0]
         archivo_final = archivo_src
@@ -92,7 +92,7 @@ while True:
             header = 'HTTP/1.1 404 Not Found\n'
             response = '<html><body>Error 404: File not found</body></html>'.encode('utf-8')
             mimetype = 'text/html'
-            header += 'Content-Type: ' + mimetype + '\r\n'
+            header += 'Content-Type: ' + mimetype + '\n\n'
 
     respuesta = header.encode('utf-8')
     respuesta += response
