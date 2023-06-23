@@ -29,7 +29,7 @@ while True:
         header = 'HTTP/1.1 505 HTTP Version Not Supported'
         response = '<html><body>Error 505: HTTP Version not supported</body></html>'
         mimetype = 'text/html'
-        header += 'Content-Type: ' + mimetype + '\r\n'
+        header += 'Content-Type: ' + mimetype + '\n\n'
 
     #En caso de recibir una request de un metodo distinto a GET
     elif(method != 'GET'):
